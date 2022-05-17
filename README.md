@@ -7,6 +7,7 @@ Forked from the original vcr & maintained, it's a drop-in replacement.
 
 To start using, just create a adapter and put inside your client<br>
 This is a example with Dio client:
+
 ```dart
 VcrAdapter adapter = VcrAdapter();
 Dio client = Dio();
@@ -18,7 +19,7 @@ After config the adapter, you now can use a cassette
 ```dart
 adapter.useCassette('github/user_repos');
 
-Response response = await client.get('https://api.github.com/users/keviinlouis/repos');
+Response response = await client.get('https://api.github.com/users/trunghq3101/repos');
 expect(response.statusCode, 200);
 ```
 
@@ -30,5 +31,5 @@ If de adapter can't find the right request, he will make a normal request and th
 This package is inspired by VCR gem
 
 #### Next Features
-- [ ] Work with Http Package
 
+- [ ] Work with Http Package

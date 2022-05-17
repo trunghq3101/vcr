@@ -23,10 +23,10 @@ class VcrAdapter implements HttpClientAdapter {
     Stream<List<int>>? requestStream,
     Future? cancelFuture,
   ) {
-    if (file!.existsSync())
+    if (file != null && file!.existsSync())
       return makeMockRequest(file!, options, requestStream, cancelFuture);
 
-    return makeNormalRequest(file!, options, requestStream, cancelFuture);
+    return makeNormalRequest(file, options, requestStream, cancelFuture);
   }
 
   useCassette(path) {
@@ -47,7 +47,7 @@ class VcrAdapter implements HttpClientAdapter {
   }
 
   Future<ResponseBody> makeNormalRequest(
-    File file,
+    File? file,
     RequestOptions options,
     Stream<List<int>>? requestStream,
     Future? cancelFuture,
@@ -63,7 +63,7 @@ class VcrAdapter implements HttpClientAdapter {
 
     var data = await transformer.transformResponse(options, responseBody);
 
-    _storeRequest(file, options, data, responseBody);
+    if (file != null) _storeRequest(file, options, data, responseBody);
 
     return ResponseBody.fromString(
       json.encode(data),
